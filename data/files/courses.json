@@ -1,0 +1,38 @@
+[
+    {
+        "id": 2,
+        "title": "برنامه نویسی پیشرفته",
+        "code": "CE404",
+        "unit": 3,
+        "capacity": 30,
+        "professor_id": 2,
+        "students_ids": []
+    },
+    {
+        "id": 3,
+        "title": "ریاضی 2",
+        "code": "MTH404",
+        "unit": 3,
+        "capacity": 30,
+        "professor_id": 2,
+        "students_ids": []
+    },
+    {
+        "id": 4,
+        "title": "فیزیک 2",
+        "code": "PH404",
+        "unit": 3,
+        "capacity": 32,
+        "professor_id": 2,
+        "students_ids": []
+    },
+    {
+        "id": 5,
+        "title": "فارسی",
+        "code": "FA404",
+        "unit": 3,
+        "capacity": 20,
+        "professor_id": 5,
+        "students_ids": []
+    }
+]

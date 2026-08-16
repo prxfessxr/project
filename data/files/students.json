@@ -1,0 +1,26 @@
+[
+    {
+        "id": 2,
+        "first_name": "علی",
+        "last_name": "سهرابی",
+        "student_number": "4051423",
+        "major": "کامپیوتر",
+        "selected_courses_ids": []
+    },
+    {
+        "id": 3,
+        "first_name": "رامسین",
+        "last_name": "شمس",
+        "student_number": "4061423",
+        "major": "کامپیوتر",
+        "selected_courses_ids": []
+    },
+    {
+        "id": 4,
+        "first_name": "امیر محمد",
+        "last_name": "شیری",
+        "student_number": "4071423",
+        "major": "کامپیوتر",
+        "selected_courses_ids": []
+    }
+]

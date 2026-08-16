@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>سامانه انتخاب واحد</title>
+  <link rel="stylesheet" href="/frontend/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">🎓</div>
+        <div>
+          <strong>سامانه انتخاب واحد</strong>
+          <span>Course Selection</span>
+        </div>
+      </div>
+
+      <nav>
+        <button class="nav-btn active" data-page="dashboard">داشبورد</button>
+        <button class="nav-btn" data-page="students">دانشجویان</button>
+        <button class="nav-btn" data-page="professors">اساتید</button>
+        <button class="nav-btn" data-page="courses">دروس</button>
+        <button class="nav-btn" data-page="selection">انتخاب واحد</button>
+      </nav>
+
+      <div class="api-status">
+        <span id="statusDot"></span>
+        <span id="statusText">در حال بررسی API...</span>
+      </div>
+    </aside>
+
+    <main class="content">
+      <header class="topbar">
+        <div>
+          <h1 id="pageTitle">داشبورد</h1>
+          <p id="pageSubtitle">مدیریت ساده سامانه انتخاب واحد</p>
+        </div>
+        <button class="btn secondary" onclick="refreshCurrentPage()">↻ بروزرسانی</button>
+      </header>
+
+      <section id="dashboard" class="page active">
+        <div class="hero">
+          <div>
+            <span class="eyebrow">UNIVERSITY PORTAL</span>
+            <h2>به سامانه انتخاب واحد خوش آمدید</h2>
+            <p>یک رابط ساده برای مدیریت دانشجویان، اساتید، دروس و انتخاب واحد.</p>
+          </div>
+          <div class="hero-icon">📚</div>
+        </div>
+
+        <div class="stats">
+          <div class="stat-card"><span>دانشجویان</span><strong id="studentCount">-</strong></div>
+          <div class="stat-card"><span>اساتید</span><strong id="professorCount">-</strong></div>
+          <div class="stat-card"><span>دروس</span><strong id="courseCount">-</strong></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <div><h3>دسترسی سریع</h3><p>عملیات اصلی سامانه</p></div>
+          </div>
+          <div class="quick-grid">
+            <button class="quick-card" onclick="goTo('students')">👨‍🎓<b>مدیریت دانشجویان</b><span>افزودن و ویرایش</span></button>
+            <button class="quick-card" onclick="goTo('professors')">👨‍🏫<b>مدیریت اساتید</b><span>افزودن و ویرایش</span></button>
+            <button class="quick-card" onclick="goTo('courses')">📖<b>مدیریت دروس</b><span>ایجاد و اختصاص استاد</span></button>
+            <button class="quick-card" onclick="goTo('selection')">📝<b>انتخاب واحد</b><span>انتخاب یا حذف درس</span></button>
+          </div>
+        </div>
+      </section>
+
+      <section id="students" class="page">
+        <div class="panel">
+          <div class="panel-head">
+            <div><h3>دانشجویان</h3><p>لیست دانشجویان ثبت‌شده</p></div>
+            <button class="btn primary" onclick="openStudentModal()">+ دانشجوی جدید</button>
+          </div>
+          <div class="table-wrap"><table><thead><tr><th>شناسه</th><th>نام</th><th>شماره دانشجویی</th><th>رشته</th><th>دروس</th><th>عملیات</th></tr></thead><tbody id="studentsTable"></tbody></table></div>
+        </div>
+      </section>
+
+      <section id="professors" class="page">
+        <div class="panel">
+          <div class="panel-head">
+            <div><h3>اساتید</h3><p>لیست اساتید ثبت‌شده</p></div>
+            <button class="btn primary" onclick="openProfessorModal()">+ استاد جدید</button>
+          </div>
+          <div class="table-wrap"><table><thead><tr><th>شناسه</th><th>نام</th><th>کد پرسنلی</th><th>گروه</th><th>دروس</th><th>عملیات</th></tr></thead><tbody id="professorsTable"></tbody></table></div>
+        </div>
+      </section>
+
+      <section id="courses" class="page">
+        <div class="panel">
+          <div class="panel-head">
+            <div><h3>دروس</h3><p>دروس ارائه‌شده و استاد هر درس</p></div>
+            <button class="btn primary" onclick="openCourseModal()">+ درس جدید</button>
+          </div>
+          <div class="table-wrap"><table><thead><tr><th>کد</th><th>عنوان</th><th>واحد</th><th>ظرفیت</th><th>وضعیت</th><th>استاد</th><th>عملیات</th></tr></thead><tbody id="coursesTable"></tbody></table></div>
+        </div>
+      </section>
+
+      <section id="selection" class="page">
+        <div class="selection-box">
+          <div class="panel">
+            <div class="panel-head"><div><h3>انتخاب واحد دانشجو</h3><p>ابتدا دانشجو را انتخاب کنید.</p></div></div>
+            <div class="form-row">
+              <label>دانشجو
+                <select id="selectionStudent" onchange="loadStudentCourses()"></select>
+              </label>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><div><h3>دروس موجود</h3><p>برای انتخاب یک درس روی دکمه انتخاب بزنید.</p></div></div>
+            <div id="courseCards" class="course-grid"></div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><div><h3>دروس انتخاب‌شده</h3></div></div>
+            <div id="selectedCourses" class="selected-list"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="modal" class="modal hidden">
+    <div class="modal-card">
+      <div class="modal-head"><h3 id="modalTitle">فرم</h3><button onclick="closeModal()">×</button></div>
+      <form id="modalForm" onsubmit="submitModal(event)"></form>
+    </div>
+  </div>
+  <div id="toast" class="toast"></div>
+
+  <script src="/frontend/app.js"></script>
+</body>
+</html>

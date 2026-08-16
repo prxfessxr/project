@@ -1,0 +1,40 @@
+[
+    {
+        "id": 2,
+        "first_name": "آرمین",
+        "last_name": "رشنو",
+        "personnel_code": "123456",
+        "department": "کامپیوتر",
+        "course_ids": [
+            2,
+            3,
+            4
+        ]
+    },
+    {
+        "id": 3,
+        "first_name": "صبا",
+        "last_name": "یعقوبی پور",
+        "personnel_code": "1234567",
+        "department": "کامپیوتر",
+        "course_ids": []
+    },
+    {
+        "id": 4,
+        "first_name": "نسرین",
+        "last_name": "سپهوند",
+        "personnel_code": "12345678",
+        "department": "ریاضی",
+        "course_ids": []
+    },
+    {
+        "id": 5,
+        "first_name": "نفیسه",
+        "last_name": "مرادخانی",
+        "personnel_code": "123456789",
+        "department": "ادبیات",
+        "course_ids": [
+            5
+        ]
+    }
+]
